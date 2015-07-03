@@ -1,8 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
-import {WebAPI} from './services/backend-http';
+import {Config} from '../config/config';
+import {HttpClient} from 'aurelia-http-client';
 
-@inject(Router, WebAPI)
+@inject(Router, HttpClient, Config)
 export class Login {
 
   // @todo: Remove default credentials.
@@ -11,9 +12,10 @@ export class Login {
     pass: '1234'
   }
 
-  constructor(router, api) {
+  constructor(router, http, config) {
     this.router = router;
-    this.api = api;
+    this.http = http;
+    this.config = config;
   }
 
   get canLogin() {
@@ -26,6 +28,10 @@ export class Login {
     var base64 = window.btoa(credentials.username + ':' + credentials.pass);
 
     return this.http
+      .configure(x => {
+        x.withBaseUri(config.backendUrl);
+        x.withHeader('Authorization', 'Basic ' + base64);
+      })
       .get('api/login-token')
       .then(response => {
         // Add access token to the localStorage.
