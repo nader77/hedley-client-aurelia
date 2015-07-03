@@ -6,7 +6,7 @@ import {HttpClient} from 'aurelia-http-client';
 @inject(Router, HttpClient, Config)
 export class Login {
 
-  // @todo: Remove default credentials.
+  // Default credentials.
   credentials = {
     username: 'demo',
     pass: '1234'
