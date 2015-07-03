@@ -19,7 +19,7 @@ export class Login {
   }
 
   get canLogin() {
-    return this.credentials.username && this.credentials.pass && !this.api.isRequesting;
+    return this.credentials.username && this.credentials.pass && !this.http.isRequesting;
   }
 
   login() {
@@ -29,7 +29,7 @@ export class Login {
 
     return this.http
       .configure(x => {
-        x.withBaseUri(config.backendUrl);
+        x.withBaseUrl(this.config.backendUrl);
         x.withHeader('Authorization', 'Basic ' + base64);
       })
       .get('api/login-token')
