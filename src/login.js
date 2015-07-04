@@ -4,10 +4,10 @@ import {Config} from '../config/config';
 import {HttpClient} from 'aurelia-http-client';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
-import {AuthRedirect} from './auth-redirect';
+import {Auth} from './services/auth';
 
 
-@inject(AuthRedirect, Config, EventAggregator, HttpClient, Router)
+@inject(Auth, Config, EventAggregator, HttpClient, Router)
 export class Login {
 
   // Default credentials.
@@ -16,9 +16,9 @@ export class Login {
     pass: '1234'
   }
 
-  constructor(authRedirect, config, eventAggregator, http, router) {
+  constructor(auth, config, eventAggregator, http, router) {
     // Subscribe to events.
-    authRedirect.subscribe();
+    auth.subscribe();
 
     this.config = config;
     this.eventAggregator = eventAggregator;
