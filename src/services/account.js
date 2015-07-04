@@ -20,8 +20,9 @@ export class Account {
     return this.http
       .get('api/v1.0/me')
       .then(response => {
-        this.setCache(response.data);
-        return response.data;
+        var data = JSON.parse(response.response).data[0];
+        this.setCache(data);
+        return data;
       });
   }
 
