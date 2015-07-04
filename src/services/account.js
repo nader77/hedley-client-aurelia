@@ -8,7 +8,7 @@ export class Account {
   cache = null;
 
   constructor(http) {
-    this.http = http;
+    this.http = http.http;
   }
 
   get() {

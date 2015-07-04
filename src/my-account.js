@@ -14,7 +14,7 @@ export class MyAccount {
     this.account
       .get()
       .then(response => {
-        log(response);
+        console.log(response);
         account = response;
       });
   }
