@@ -14,7 +14,7 @@ export class Account {
   get() {
     var cache = this.getCache();
     if (!!cache) {
-      return cache;
+      return Promise.resolve(cache);
     }
 
     return this.http

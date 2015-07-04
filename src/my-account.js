@@ -11,7 +11,7 @@ export class MyAccount {
   }
 
   activate() {
-    this.account
+    return this.account
       .get()
       .then(response => {
         this.account = response;
