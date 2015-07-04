@@ -20,6 +20,13 @@ export class App {
         nav: true,
         title: 'Login'
       },
+      {
+        route: 'my-account',
+        name: 'my-account',
+        moduleId: './my-account',
+        nav: true,
+        title: 'My Account'
+      },
       { route: 'child-router', name: 'child-router', moduleId: './child-router', nav: true, title:'Child Router' }
     ]);
 

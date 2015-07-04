@@ -2,16 +2,16 @@ import {inject} from 'aurelia-framework';
 import {WebAPI} from './backend-http';
 
 @inject(WebAPI)
-export class Auth {
+export class Account {
 
   // Internal cache.
-  let cache;
+  cache = null;
 
   constructor(http) {
     this.http = http;
   }
 
-  get get() {
+  get() {
     var cache = this.getCache();
     if (!!cache) {
       return cache;
