@@ -12,7 +12,7 @@ export class Auth {
 
   subscribe() {
     this.eventAggregator.subscribe('user_login', payload => {
-      this.router.navigate('welcome');
+      this.router.navigate('my-account');
     });
   }
 }

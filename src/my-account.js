@@ -4,18 +4,17 @@ import {Account} from './services/account';
 @inject(Account)
 export class MyAccount {
 
-  account = {}
+  account = {};
 
   constructor(account) {
     this.account = account;
   }
 
   activate() {
-    this.account
+    return this.account
       .get()
       .then(response => {
-        log(response);
-        account = response;
+        this.account = response;
       });
   }
 }
