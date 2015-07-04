@@ -4,7 +4,10 @@ import {Config} from '../config/config';
 import {HttpClient} from 'aurelia-http-client';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
-@inject(Config, EventAggregator, HttpClient, Router)
+import {AuthRedirect} from './auth-redirect';
+
+
+@inject(AuthRedirect, Config, EventAggregator, HttpClient, Router)
 export class Login {
 
   // Default credentials.
@@ -13,7 +16,10 @@ export class Login {
     pass: '1234'
   }
 
-  constructor(config, eventAggregator, http, router) {
+  constructor(authRedirect, config, eventAggregator, http, router) {
+    // Subscribe to events.
+    authRedirect.subscribe();
+
     this.config = config;
     this.eventAggregator = eventAggregator;
     this.http = http;
@@ -29,11 +35,6 @@ export class Login {
     // Convert to base64.
     var base64 = window.btoa(credentials.username + ':' + credentials.pass);
 
-    this.eventAggregator.subscribe('user_login', payload => {
-      console.log('user logged');
-      console.log(payload);
-    });
-
     return this.http
       .configure(x => {
         x.withBaseUrl(this.config.backendUrl);
@@ -45,11 +46,8 @@ export class Login {
         var accessToken = JSON.parse(response.response).access_token;
         localStorage.setItem('access_token', accessToken);
 
-        console.log('ok');
-
         // Notify user has logged in.
         this.eventAggregator.publish('user_login', JSON.parse(response.response));
-
       });
   }
 }

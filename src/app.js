@@ -1,5 +1,6 @@
 import 'bootstrap';
 import 'bootstrap/css/bootstrap.css!';
+import 'auth-redirect';
 
 export class App {
   configureRouter(config, router){
