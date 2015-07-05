@@ -3,30 +3,28 @@ import 'bootstrap/css/bootstrap.css!';
 
 export class App {
   configureRouter(config, router){
-    config.title = 'Aurelia';
+    config.title = 'Skeleton';
+    config.mapUnknownRoutes(instruction => {
+      //check instruction.fragment
+      //set instruction.config.moduleId
+      instruction.config.moduleId = './403';
+
+    });
     config.map([
       {
-        route: ['','welcome'],
-        name: 'welcome',
-        moduleId: './welcome',
-        nav: true,
-        title:'Welcome'
+        route: ['', 'homepage', 'dashboard'],
+        name: 'homepage',
+        moduleId: '.dashboard/homepage',
+        nav: false,
+        title:'Homepage'
       },
       {
-        route: 'login',
-        name: 'login',
-        moduleId: './login',
-        nav: true,
-        title: 'Login'
-      },
-      {
-        route: 'my-account',
-        name: 'my-account',
-        moduleId: './my-account',
-        nav: true,
-        title: 'My Account'
-      },
-      { route: 'child-router', name: 'child-router', moduleId: './child-router', nav: true, title:'Child Router' }
+        route: ['403'],
+        name: '403',
+        moduleId: '.403',
+        nav: false,
+        title:'403'
+      }
     ]);
 
     this.router = router;
