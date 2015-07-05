@@ -14,9 +14,23 @@ export class App {
       {
         route: ['', 'homepage', 'dashboard'],
         name: 'homepage',
-        moduleId: '.dashboard/homepage',
+        moduleId: './dashboard/homepage',
         nav: false,
         title:'Homepage'
+      },
+      {
+        route: 'my-account',
+        name: 'my-account',
+        moduleId: './my-account',
+        nav: true,
+        title: 'My Account'
+      },
+      {
+        route: 'login',
+        name: 'login',
+        moduleId: './login',
+        nav: true,
+        title: 'Login'
       },
       {
         route: ['403'],
