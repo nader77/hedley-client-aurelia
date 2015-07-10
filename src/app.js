@@ -1,9 +1,14 @@
 import 'bootstrap';
 import 'bootstrap/css/bootstrap.css!';
 
+import {AuthorizeStep} from './pipeline/authorize-step';
+
 export class App {
   configureRouter(config, router){
     config.title = 'Aurelia';
+
+    // Add a route filter to the authorize extensibility point.
+    config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
       {
         route: ['','welcome'],
@@ -18,6 +23,13 @@ export class App {
         moduleId: './login',
         nav: true,
         title: 'Login'
+      },
+      {
+        route: 'logout',
+        name: 'logout',
+        moduleId: './logout',
+        nav: true,
+        title: 'Logout'
       },
       {
         route: 'my-account',
