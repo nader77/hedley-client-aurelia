@@ -23,6 +23,9 @@ export class WebAPI {
     this.subscribeEvents();
   }
 
+  /**
+   * Re-add the "withHeader" with access token, in case of login, or logout. 
+   */
   initHttp() {
     this.http
       .configure(x => {
