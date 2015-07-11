@@ -6,7 +6,7 @@ import {WebAPI} from './backend-http';
 export class ResourceAbstract {
 
   // Internal cache.
-  cache = null;
+  cache = {};
   resourceName = null;
 
   constructor(eventAggregator, http) {
@@ -16,15 +16,19 @@ export class ResourceAbstract {
     this.subscribeEvents();
   }
 
-  get() {
+  get(params) {
     var cache = this.getCache();
     if (!!cache) {
       console.log(this.resourceName + ' from cache');
       return Promise.resolve(cache);
     }
 
+    params = params || {};
     console.log(this.resourceName + ' from server');
     return this.http
+      .configure(x => {
+        x.withParams(params);
+      })
       .get(this.endpoint)
       .then(response => {
         var data = JSON.parse(response.response).data;
@@ -34,17 +38,17 @@ export class ResourceAbstract {
   }
 
   setCache(data) {
-    this.cache = data;
+    this.cache[this.resourceName] = data;
   }
 
   getCache() {
-    return this.cache;
+    return this.cache[this.resourceName];
   }
 
   subscribeEvents() {
     this.eventAggregator.subscribe('clear_cache', payload => {
       console.log('clear cache companies');
-      this.cache = null;
+      this.cache = {};
     });
   }
 }
