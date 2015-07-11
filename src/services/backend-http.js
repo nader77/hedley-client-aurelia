@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {inject, transient} from 'aurelia-framework';
 import {Auth} from './auth';
 import {Config} from '../config/config';
 import {EventAggregator} from 'aurelia-event-aggregator';
@@ -6,7 +6,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 
 
-
+@transient()
 @inject(Auth, Config, EventAggregator)
 export class WebAPI {
 
