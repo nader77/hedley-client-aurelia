@@ -4,6 +4,8 @@ import {Config} from '../config/config';
 import {HttpClient} from 'aurelia-http-client';
 
 
+// Make sure the service is not singleton, as each time we may change the
+// withParams value, an we don't want it to persist.
 @transient()
 @inject(Auth, Config)
 export class WebAPI {
