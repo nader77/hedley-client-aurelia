@@ -3,9 +3,9 @@ export class CompanyDashboard {
 
   configureRouter(config, router) {
     config.map([
-      { route: ['','welcome'], name: 'welcome',      moduleId: './welcome',      nav: true, title:'Welcome' },
       {
-        route: 'events',
+        // @todo: Change route to "events" only.
+        route: ['', 'events'],
         name: 'events',
         moduleId: './dashboard/events',
         title:'Events'
