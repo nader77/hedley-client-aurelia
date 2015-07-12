@@ -17,7 +17,7 @@ export class ResourceAbstract {
   }
 
   get(params) {
-    var cache = this.getCache();
+    var cache = this.getCache(params);
     if (!!cache) {
       console.log(this.resourceName + ' from cache');
       return Promise.resolve(cache);
@@ -32,17 +32,20 @@ export class ResourceAbstract {
       .get(this.endpoint)
       .then(response => {
         var data = JSON.parse(response.response).data;
-        this.setCache(data);
+        this.setCache(data, params);
         return data;
       });
   }
 
-  setCache(data) {
-    this.cache[this.resourceName] = data;
+  setCache(data, params) {
+    var hash = JSON.stringify(params);
+    this.cache[this.resourceName] = this.cache[this.resourceName] || {}
+    this.cache[this.resourceName][hash] = data;
   }
 
-  getCache() {
-    return this.cache[this.resourceName];
+  getCache(params) {
+    var hash = JSON.stringify(params);
+    return this.cache[this.resourceName] ? this.cache[this.resourceName][hash] : false;
   }
 
   subscribeEvents() {
