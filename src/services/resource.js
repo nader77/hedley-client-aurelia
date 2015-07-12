@@ -67,7 +67,7 @@ export class ResourceAbstract {
 
   subscribeEvents() {
     this.eventAggregator.subscribe('clear_cache', payload => {
-      console.log('clear cache companies');
+      console.log(this.resourceName + ' clear cache');
       this.cache = {};
     });
   }

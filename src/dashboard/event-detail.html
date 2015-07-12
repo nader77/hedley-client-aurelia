@@ -1,8 +1,10 @@
 <template>
   Detail:
 
-  <div class="title">
-    ${event.label} by ${event.user.label}
+  <div class="spinner" show.bind="isLoading">Loading...</div>
+
+  <div class="title" show.bind="!isLoading">
+    ${eventDetail.label} by ${eventDetail.user.label}
   </div>
 
 </template>
