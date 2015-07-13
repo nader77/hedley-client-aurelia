@@ -1,15 +1,14 @@
 import 'bootstrap';
 import 'bootstrap/css/bootstrap.css!';
 
+import {AuthorizeStep} from './pipeline/authorize-step';
+
 export class App {
   configureRouter(config, router){
-    config.title = 'Skeleton';
-    config.mapUnknownRoutes(instruction => {
-      //check instruction.fragment
-      //set instruction.config.moduleId
-      instruction.config.moduleId = './403';
+    config.title = 'Aurelia';
 
-    });
+    // Add a route filter to the authorize extensibility point.
+    config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
       {
         route: ['', 'homepage', 'dashboard'],
@@ -33,11 +32,37 @@ export class App {
         title: 'Login'
       },
       {
-        route: ['403'],
-        name: '403',
-        moduleId: '.403',
-        nav: false,
-        title:'403'
+        route: 'logout',
+        name: 'logout',
+        moduleId: './logout',
+        nav: true,
+        title: 'Logout'
+      },
+      {
+        route: 'my-account',
+        name: 'my-account',
+        moduleId: './my-account',
+        nav: true,
+        title: 'My Account'
+      },
+      {
+        route: 'companies',
+        name: 'companies',
+        moduleId: './companies',
+        nav: true,
+        title: 'Companies'
+      },
+      {
+        route: 'dashboard/:companyId',
+        name: 'dashboard',
+        moduleId: './dashboard',
+      },
+      {
+        route: 'child-router',
+        name: 'child-router',
+        moduleId: './child-router',
+        nav: true,
+        title:'Child Router'
       }
     ]);
 
